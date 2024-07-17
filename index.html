@@ -245,7 +245,7 @@
     document.addEventListener('surfly:session_started', function(event) {
         var codeDisplay = document.createElement('div');
         codeDisplay.className = 'code-display';
-        codeDisplay.innerText = 'Session Code: ' + event.detail.code;
+        codeDisplay.innerText = 'Session Code: ' +`event.detail.code;
         document.body.appendChild(codeDisplay);
     });
 </script>
