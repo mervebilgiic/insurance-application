@@ -108,7 +108,7 @@
         a:hover {
             text-decoration: underline;
         }
-        /* Added styles to ensure the code display doesn't obstruct the admit button */
+        /* CSS for the session code display */
         .code-display {
             position: fixed;
             top: 10px;
@@ -117,6 +117,7 @@
             border: 1px solid #007bff;
             padding: 10px;
             z-index: 1000;
+            pointer-events: none; /* Ensure this div doesn't block other UI elements */
         }
     </style>
 </head>
@@ -236,7 +237,7 @@
         console.log("Initialization result: ", initResult);
         if (initResult.success) {
             console.log('Surfly initialized successfully');
-            Surfly.button(); // Display the default Surfly button
+            Surfly.button();
         } else {
             console.log("Surfly was unable to initialize properly:", initResult.errorMsg);
         }
@@ -245,7 +246,7 @@
     document.addEventListener('surfly:session_started', function(event) {
         var codeDisplay = document.createElement('div');
         codeDisplay.className = 'code-display';
-        codeDisplay.innerText = 'Session Code: ' +`event.detail.code;
+        codeDisplay.innerText = 'Session Code: ' + event.detail.code;
         document.body.appendChild(codeDisplay);
     });
 </script>
