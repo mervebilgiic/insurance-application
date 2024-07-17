@@ -108,6 +108,16 @@
         a:hover {
             text-decoration: underline;
         }
+        /* Added styles to ensure the code display doesn't obstruct the admit button */
+        .code-display {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            border: 1px solid #007bff;
+            padding: 10px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -215,7 +225,7 @@
     <p>&copy; 2024 Insurance Company. All rights reserved.</p>
 </div>
 
-<!-- Surfly Integration Script -->
+<!-- Surfly Initialization Script -->
 <script>
     (function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
     l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
@@ -230,6 +240,13 @@
         } else {
             console.log("Surfly was unable to initialize properly:", initResult.errorMsg);
         }
+    });
+
+    document.addEventListener('surfly:session_started', function(event) {
+        var codeDisplay = document.createElement('div');
+        codeDisplay.className = 'code-display';
+        codeDisplay.innerText = 'Session Code: ' + event.detail.code;
+        document.body.appendChild(codeDisplay);
     });
 </script>
 
