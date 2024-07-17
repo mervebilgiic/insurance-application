@@ -229,24 +229,19 @@
         console.log("Initialization result: ", initResult);
         if (initResult.success) {
             console.log('Surfly initialized successfully');
-            if (!Surfly.isInsideSession) {
-                Surfly.button({
-                    hide_support_button_when_unavailable: false,
-                    support_button_position: 'bottomleft'
-                });
-            }
         } else {
-            console.error("Surfly was unable to initialize properly:", initResult.errorMsg);
+            console.log("Surfly was unable to initialize properly:", initResult.errorMsg);
         }
     });
 
     document.getElementById("surfly-btn").onclick = function() {
         console.log("Starting Surfly session...");
-        var session = Surfly.session();
-        session.startLeader().then(function(result) {
-            console.log("Surfly session started successfully:", result);
+        Surfly.session().startLeader().then(function(session) {
+            console.log("Surfly session started:", session);
         }).catch(function(error) {
             console.error("Error starting Surfly session:", error);
+            console.error("Error details: ", error.details);
+            console.error("Error reason: ", error.reason);
         });
     }
 </script>
