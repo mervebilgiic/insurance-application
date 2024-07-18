@@ -230,21 +230,13 @@
         console.log("Initialization result: ", initResult);
         if (initResult.success) {
             console.log('Surfly initialized successfully');
+            if (!Surfly.isInsideSession) {
+                Surfly.button();
+            }
         } else {
             console.log("Surfly was unable to initialize properly:", initResult.errorMsg);
         }
     });
-
-    document.getElementById("surfly-btn").onclick = function() {
-        console.log("Starting Surfly session...");
-        Surfly.session().startLeader().then(function(session) {
-            console.log("Surfly session started:", session);
-        }).catch(function(error) {
-            console.error("Error starting Surfly session:", error);
-            console.error("Error details: ", error.details);
-            console.error("Error reason: ", error.reason);
-        });
-    }
 </script>
 
 </body>
